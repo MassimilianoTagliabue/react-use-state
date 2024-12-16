@@ -1,29 +1,30 @@
 import { useState } from 'react';
-import AppButton from "./AppButton";
+
 
 function AppCard({ languages }) {
 
+    let [titolo, setTitolo] = useState(languages[0].title);
+    let [descrizione, setDescrizione] = useState(languages[0].description)
 
-    const prendiTitolo = () =>{
+    
 
-        console.log("salve");
-        
-    }
 
     return (
         <>
             <div className="flex">
+                {languages.map((curLang, index) => {
 
-                
-                {languages.map((curLang) => {
 
                     return (
-                        <div>
-                            <AppButton
-                                title={curLang.title}
-                                description={curLang.description}
-                                takeTitle={prendiTitolo}
-                            />
+                        <div key={index}>
+                            <button onClick={
+                                () => {
+                                setTitolo(titolo = curLang.title);
+                                setDescrizione(descrizione = curLang.description);
+                            }} 
+                            
+                            className="btn btn-primary ms-marg-left">{curLang.title}</button>
+
                         </div>
                     )
                 })}
@@ -32,8 +33,8 @@ function AppCard({ languages }) {
             <div className="mt-5 ms-marg-left">
                 <div className="card">
                     <div className="card-body">
-                        <h5 className="card-title">{languages[0].title}</h5>
-                        <p className="card-text">{languages[0].description}</p>
+                        <h5 className="card-title">{titolo}</h5>
+                        <p className="card-text">{descrizione}</p>
 
                     </div>
                 </div>
@@ -44,5 +45,8 @@ function AppCard({ languages }) {
 
 
 }
+
+
+
 
 export default AppCard;
